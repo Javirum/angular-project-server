@@ -7,10 +7,14 @@ const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
+const flash = require('connect-flash');
+
 
 
 
 const auth = require('./routes/auth');
+const search = require('./routes/search');
+
 
 const app = express();
 
@@ -33,6 +37,8 @@ app.use(cors({
   credentials: true,
   origin: ['http://localhost:4200']
 }));
+app.use(flash());
+
 
 app.use(session({
   store: new MongoStore({
@@ -50,6 +56,7 @@ app.use(session({
 // -- routes
 
 app.use('/auth', auth);
+app.use('/search', search);
 
 // -- error handling
 
