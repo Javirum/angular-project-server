@@ -17,20 +17,8 @@ router.get('/', (req, res, next) => {
 
   eventApi.get(searchTerm)
     .then(response => {
-      console.log(response)
-      data.sections.push({
-        title: `Search results for "${searchTerm}"`,
-        listings: results,
-      })
-        .catch(err => {
-        })
-    });
-
-
-
-  // document.getElementById("eventButton").onclick = function () {
-  //   getEventInfo();
-  // }
-
+      res.status(200).json(response.data.events)
+    })
+    .catch(next)
 });
 module.exports = router;
