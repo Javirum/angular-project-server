@@ -12,7 +12,7 @@ router.get('/', (req, res, next) => {
   };
 
   const eventApi = axios.create({
-    baseURL: 'https://api.skypicker.com/flights??flyFrom,to,dateFrom,dateTo'
+    baseURL: 'https://api.skypicker.com/flights&q=searchTerm'
   })
 
   eventApi.get(searchTerm)
