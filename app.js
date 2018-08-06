@@ -9,12 +9,9 @@ const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
 
-
-
-
 const auth = require('./routes/auth');
 const search = require('./routes/search');
-const flights = require('./routes/flights');
+// const flights = require('./routes/flights');
 
 
 const app = express();
@@ -58,7 +55,7 @@ app.use(session({
 
 app.use('/auth', auth);
 app.use('/search', search);
-app.use('/flights', flights);
+// app.use('/flights', flights);
 
 // -- error handling
 
