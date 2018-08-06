@@ -15,10 +15,20 @@ router.get('/', (req, res, next) => {
     baseURL: 'https://www.eventbriteapi.com/v3/events/search/?token=46GO25BBBR7OOMYSTXOK&q=searchTerm'
   })
 
-  eventApi.get(searchTerm)
-    .then(response => {
-      res.status(200).json(response.data.events)
+  const flightApi = axios.create({
+    baseURL: `https://api.skypicker.com`
+  })
+
+  const eventsPromise = eventApi.get(searchTerm)
+
+  const flightsPromise = flightApi.get(`locations?term=${searchTerm}`)
+
+  Promise.all([eventsPromise, flightsPromise])
+    .then((values) => {
+      console.log(values);
+      const vals = [values[0].data, values[1].data]
+      res.status(200).json(vals)
     })
-    .catch(next)
+    .catch(next);
 });
 module.exports = router;
