@@ -5,7 +5,12 @@ var axios = require('axios');
 /* GET users listing. */
 router.get('/', (req, res, next) => {
 
-  const searchTerm = req.query.search;
+  const flyFrom = req.query.flyFrom;
+  const searchTerm = req.query.to;
+  const dF = req.query.startdate.split('-')
+  const dateFrom = [dF[2], dF[1], dF[0]].join('/')
+  const dT = req.query.enddate.split('-');
+  const dateTo = [dT[2], dT[1], dT[0]].join('/')
   const data = {
     messages: req.flash('error'),
     sections: []
@@ -21,7 +26,7 @@ router.get('/', (req, res, next) => {
 
   const eventsPromise = eventApi.get(searchTerm)
 
-  const flightsPromise = flightApi.get(`locations?term=${searchTerm}`)
+  const flightsPromise = flightApi.get(`flights?flyFrom=${flyFrom}&to=${searchTerm}&dateFrom=${dateFrom}&dateTo=${dateTo}`)
 
   Promise.all([eventsPromise, flightsPromise])
     .then((values) => {
