@@ -21,7 +21,7 @@ const app = express();
 // -- database
 
 mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/floight', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   reconnectTries: Number.MAX_VALUE
 });
@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(cors({
   credentials: true,
-  origin: ['http://localhost:4200']
+  origin: [process.env.CLIENT_URL]
 }));
 app.use(flash());
 
