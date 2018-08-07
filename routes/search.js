@@ -7,7 +7,7 @@ router.get('/', (req, res, next) => {
   const searchTerm = req.query.eventsIn;
 
   const eventApi = axios.create({
-    baseURL: 'https://www.eventbriteapi.com/v3/events/search/?token=46GO25BBBR7OOMYSTXOK&location.address=searchTerm'
+    baseURL: `https://www.eventbriteapi.com/v3/events/search/?token=${process.env.EVENTS_KEY}&location.address=searchTerm`
   })
 
   eventApi.get(searchTerm)

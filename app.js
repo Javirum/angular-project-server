@@ -8,6 +8,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const mongoose = require('mongoose');
 const flash = require('connect-flash');
+const dotenv = require('dotenv').config();
 
 const auth = require('./routes/auth');
 const search = require('./routes/search');
